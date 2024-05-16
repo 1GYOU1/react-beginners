@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+	<body>
+		<div id="root"></div>
+	</body>
+	<script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script><!--React Js-->
+	<script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script><!--React DOM-->
+	<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script><!--bable-->
+	<script type="text/babel">
+		//불필요한 re-render는 React.memo()로 관리하기.
+
+		function Btn({text, onClick}){
+			console.log(text, "was rendered");
+			return(
+				<button
+					onClick={onClick}
+					style={{
+						backgroundColor:'tomato',
+						color:'white',
+						padding:'10px 20px',
+						border:0,
+						borderRadius:10,
+					}}
+				>
+				{text}
+				</button>
+			)
+		}
+		/*
+		불필요한 re-render는 React.memo()로 관리할 수 있음
+		부모 컴포넌트의 state를 변경하면 당연히 그 자식 컴포넌트들도 Re-render가 일어남. 불필요한 렌더링이 발생할 수도 있는데, 이 경우에는 React.memo()로 prop의 변경이 일어난 부분만 렌더링 시킬 수 있음. 아주 많은 자식 컴포넌트를 가지고 있는 부모 컴포넌트일 때 사용.
+
+		* React.memo()
+		컴포넌트가 React.memo()로 wrapping 될 때, React는 컴포넌트를 렌더링하고 결과를 메모이징(Memoizing)한다. 그리고 다음 렌더링이 일어날 때 props가 같다면, React는 메모이징(Memoizing)된 내용을 재사용한다.
+		*/
+		const MemorizeBtn = React.memo(Btn);
+		function App(){
+			const [value, setValue] = React.useState("Save Changes");
+			const changeValue = () => setValue("Revert Changes");
+			return(
+				<div>
+					{/*
+					Btn onClick={changeValue} /> 이것은 이벤트 리스너를 붙인 것이 아닌, 컴포넌트에 onClick이라는 프롭을 전달한 것이다. 여기서 onClick은 단순히 props의 이름이다. 
+
+					결국 컴포넌트에 onClick 이벤트리스너를 붙이고 싶다면 해당 컴포넌트의 props으로 이벤트 리스너를 보내고, 그걸 받아오면 해당 컴포넌트의 최상단 엘리먼트에 onClick 이벤트 리스너를 붙이면 된다.
+					line 15 참고.
+
+					컴포넌트만들 땐 항상 대문자로 시작
+					*/}
+					<MemorizeBtn text={value} onClick={changeValue} />
+					<MemorizeBtn text="Continue"/>
+				</div>
+			);
+		}
+		
+		const root = document.getElementById('root');
+		ReactDOM.render(<App/>, root);
+	</script>
+</html>

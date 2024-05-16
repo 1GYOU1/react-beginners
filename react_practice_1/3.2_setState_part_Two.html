@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+	<body>
+		<div id="root"></div>
+	</body>
+	<script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script><!--React Js-->
+	<script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script><!--React DOM-->
+	<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script><!--bable-->
+	<script type="text/babel">
+		//버튼 클릭시마다 +1 되는 카운터 만들기 - useState 업데이트 연습
+		const root = document.getElementById('root');
+		function App(){
+			/*
+			const [data값(state), data 값을 바꿀때 사용할 modifier 함수] = React.useState(처음 시작될 data값)
+			어떤 값을 부여하건 modifier 함수는 그 값으로 업데이트하고, 해당 부분을 찾아서 부분적으로 리렌더링을 일으킴.
+			변수를 컴포넌트에 연결, 변수에 데이터를 담은 다음, 해당 변수에 담긴 값 체인지
+			*/
+			const [counter, setCounter] = React.useState(0);
+			const onClick = () => {
+				//바뀔 부분 함수
+				setCounter(counter + 1);
+			};
+			return(
+				<div>
+					<h3>Total clicks: {counter}</h3>
+					<button onClick={onClick}>Click me</button>
+				</div>
+			);
+		}
+		ReactDOM.render(<App/>, root);
+	</script>
+</html>

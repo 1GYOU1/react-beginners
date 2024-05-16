@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+	<body>
+		<div id="root"></div>
+	</body>
+	<script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script><!--React Js-->
+	<script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script><!--React DOM-->
+	<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script><!--bable-->
+	<script type="text/babel">
+		const root = document.getElementById('root');
+
+		//counter 초기값 0
+		let counter = 0;
+		function countUp(){
+			counter = counter + 1;//함수 호출될때마다 +1
+			render();
+		}
+		function render(){
+			ReactDOM.render(<Container/>, root);
+		}
+		function Container () {
+			return (
+				<div>
+					<h3>Total Clicks : {counter}</h3>	
+					<button onClick = {countUp}>Click me</button>
+				</div>
+			);
+		};
+
+		render();
+	</script>
+</html>

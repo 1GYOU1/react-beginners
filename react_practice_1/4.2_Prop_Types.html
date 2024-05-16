@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+	<body>
+		<div id="root"></div>
+	</body>
+	<!-- <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>React Js -->
+	<script src="https://unpkg.com/react@17.0.2/umd/react.development.js"></script><!--React Js development version-->
+	<script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script><!--React DOM-->
+	<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script><!--bable-->
+	<script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script><!--prop-types-->
+	<script type="text/babel">
+		/*
+		<prop-type 검사하는 이유>
+		1.리액트는 파라미터를 잘 못 넘겨도 확인할 수 없는 문제점이 존재한다.
+		2. 이런 문제를 줄이기 위해서 PropTypes라는 모듈의 도움을 받을 수 있다.
+		3. type과 다르게 입력 되었을 경우 warning을 뜨게 할수 있고, parameter 에 값을 넣지 않는 경우 경고 메시지를 띄울수 있다.
+		*/
+
+							//fontSize의 default 값 설정.
+		function Btn({text, fontSize = 16}){
+			return(
+				<button
+					style={{
+						backgroundColor:'tomato',
+						color:'white',
+						padding:'10px 20px',
+						border:0,
+						borderRadius:10,
+						fontSize,
+					}}
+				>
+				{text}
+				</button>
+			)
+		}
+		/*
+		prop-types 설치하고 하단 형식으로 타입 검사.
+		isRequired를 사용하면 입력해야되는 값이 누락되었을때 콘솔 경고를 띄울 수 있음.
+		*/
+		Btn.propTypes = {
+			text: PropTypes.string.isRequired,
+			fontSize: PropTypes.number.isRequired
+		};
+		function App(){
+			return(
+				<div>
+					<Btn text="Save Changes" fontSize={18} />
+					<Btn text={14} fontSize="test"/>{/* text는 string, fontSize는 number 형식으로 입력되지않아서 오류 발생 */}
+					<Btn text="continue"/>{/* fontSize가 입력되지 않아서 type undefined 오류 발생(isRequired 사용) */}
+				</div>
+			);
+		}
+		
+		const root = document.getElementById('root');
+		ReactDOM.render(<App/>, root);
+	</script>
+</html>

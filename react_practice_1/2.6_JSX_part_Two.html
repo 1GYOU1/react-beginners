@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+	<body>
+		<div id="root"></div>
+	</body>
+	<script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script><!--React Js-->
+	<script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script><!--React DOM-->
+	<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script><!--bable-->
+	<script type="text/babel">
+		//react 일반 함수식과 화살표 함수식
+		
+		const root = document.getElementById('root');
+
+		// 일반 함수식으로 변환
+		function Title(){
+			return	(
+			<h3 id="title" onMouseEnter={() => console.log('mouse enter')}>Hello I am a Title</h3>
+			);
+		}
+
+		// 화살표 함수식으로 변환
+		const Button = () => (
+			<button style={{
+					backgroundColor: 'tomato',
+				}}
+				onClick={() => console.log('im clicked')}>
+				Click me
+			</button>
+		);
+		const Container = () => (
+			// 리액트 함수는 꼭 대문자로 불러오기 ★(html 언어와 혼동 주의) !!!!
+			<div>
+				<Title />
+				<Button />	
+			</div>
+		);
+		// 아래와 같은 표현식
+		// ReactDOM.render(Container, root);
+		ReactDOM.render(<Container/>, root);
+	</script>
+</html>

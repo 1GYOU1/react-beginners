@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+	<body>
+		<div id="root"></div>
+	</body>
+	<script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script><!--React Js-->
+	<script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script><!--React DOM-->
+	<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script><!--bable-->
+	<script type="text/babel">
+        //useState를 사용해서 minutes을 입력하면 hours로 변경해주는 입력폼 만들기 - 숫자 입력폼 만들고 입력시마다 onChange 이벤트 사용하여 화면에 업데이트 시켜보기
+		const root = document.getElementById('root');
+		function App(){
+			const [minutes, setMinutes] = React.useState();
+			const onChange = (event) => {
+				setMinutes(event.target.value);
+                //change 이벤트 발생할때마다 해당 함수 실행되고, 그 값이 minutes가 되어서 업데이트 실행.
+			};
+			return(
+				<div>
+					{/*
+						*JSX문법 
+						class는 className,
+						for는 htmlFor
+					*/}
+					<h1 className="hi">Super Converter</h1>
+					<label htmlFor="minutes">Minutes</label>
+					<input 
+						value={minutes} 
+						id="minutes" 
+						placeholder="Minutes" 
+						type="number" 
+						onChange={onChange}
+					/>
+					<h4>You want to convert {minutes}</h4>
+					<label htmlFor="hours">Hours</label>
+					<input 
+						placeholder="hours" 
+						type="number"
+					/>
+				</div>
+			);
+		}
+		ReactDOM.render(<App/>, root);
+	</script>
+</html>

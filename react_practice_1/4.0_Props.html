@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+	<body>
+		<div id="root"></div>
+	</body>
+	<script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script><!--React Js-->
+	<script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script><!--React DOM-->
+	<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script><!--bable-->
+	<script type="text/babel">
+			/*
+                하나의 컴포넌트로 여러 스타일 적용하여 사용하기.
+
+				props는 오브젝트이기 때문에 {} 중괄호 사용.
+				property(text, big 등) 키 값을 받아올 수 있음.
+			*/
+			function Btn({text, big}){
+				return(
+					<button
+						//스타일들을 모두 갖는 단 한가지의 컴포넌트로 만들어 재사용 가능
+						style={{
+							backgroundColor:'tomato',
+							color:'white',
+							padding:'10px 20px',
+							border:0,
+							borderRadius:10,
+							fontSize: big ? 25 : 12,
+						}}
+					>
+					{text}
+					</button>
+				)
+			}
+			function App(){
+			return(
+				<div>
+					<Btn text="Save Changes" big={true} />
+					<Btn text="Continue" big={false} />
+				</div>
+			);
+		}
+		
+		const root = document.getElementById('root');
+		ReactDOM.render(<App/>, root);
+	</script>
+</html>
